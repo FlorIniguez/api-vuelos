@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Company;
 import com.example.demo.model.Flight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,15 +18,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FlightRepositoryTest {
     @Autowired
     private FlightRepository flightRepository;
+    @Autowired
+    private CompanyRepository companyRepository;
     private Flight flight;
+    private Company company;
 
     @BeforeEach
     void setup() {
-        flight = new Flight("COR", "EZE", "8.00", "11.00", 200.0, "DIARIA");
+        flight = new Flight("COR", "EZE", "8.00", "11.00", 20.0, "DIARIA");
     }
 
     @Test
     void saveFlightTest() {
+        // Crear una instancia de compañía y guardarla en la base de datos
+        Company company = new Company(1L,"Nombre de la Compañía", "Banner", "URL");
+        Company savedCompany = companyRepository.save(company);
+
+        // Setear la compania al vuelo
+        flight.setCompany(savedCompany);
         // config previa en el setup que crea un vuelo
         //puedo crear el vuelo con el BeforeEach o crearlo en cada mètodo
         //lamo funcionalidad, le paso el vuelo creado en el setup
@@ -33,6 +43,7 @@ public class FlightRepositoryTest {
         //verifico salida o comportamiento
         assertThat(flightBD).isNotNull();
         assertThat(flightBD.getId()).isGreaterThan(0);
+        assertThat(flightBD.getCompany()).isEqualTo(savedCompany);
     }
     @Test
     void flightFindByIdTest() {

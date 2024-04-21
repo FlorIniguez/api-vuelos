@@ -57,7 +57,7 @@ public class FlightRepositoryTest {
     @Test
     void flightFindAllTest() {
         //configuracion previa
-        Flight flight2 = new Flight("MAD", "COR", "8.00", "11.00", 200.0, "Diaria");
+        Flight flight2 = new Flight("MAD", "COR", "8.00", "11.00", 20.0, "Diaria");
 
         flightRepository.save(flight);
         flightRepository.save(flight2);
@@ -101,8 +101,6 @@ public class FlightRepositoryTest {
 
         assertThat(flight.getOrigin()).isEqualTo("COR");
         assertThat(flightList).isNotNull();
-
-
 
 
     }

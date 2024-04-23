@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.model.Company;
 import com.example.demo.model.Flight;
+import com.example.demo.utils.FlightUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FlightRepositoryTest {
     @Autowired
     private FlightRepository flightRepository;
+
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    FlightUtils flightUtils;
     private Flight flight;
-    private Company company;
+;
+
 
     @BeforeEach
     void setup() {
@@ -69,6 +75,14 @@ public class FlightRepositoryTest {
         assertThat(flightList).isNotNull();
         assertThat(flightList.size()).isEqualTo(2);
     }
+
+    @Test
+    void flightsDolarTest() {
+
+
+    }
+
+
     @Test
     void flightDeleteById() {
         //configuracion previa
@@ -101,7 +115,6 @@ public class FlightRepositoryTest {
 
         assertThat(flight.getOrigin()).isEqualTo("COR");
         assertThat(flightList).isNotNull();
-
 
     }
 }

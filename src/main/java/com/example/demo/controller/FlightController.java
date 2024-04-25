@@ -17,14 +17,11 @@ public class FlightController {
 
     @CrossOrigin
     @GetMapping("")
-    public List<Flight> getAllFlights() {
+
+    public List<FlightDto>getAllFlights() {
         return flightService.getAllFlights();
     }
 
-    @GetMapping("/dolar-flights")
-    public List<FlightDto> flightsDolar() {
-        return flightService.findAllDto();
-    }
 
     @GetMapping("/{id}")
     public Optional<Flight> findFlightById(@PathVariable Long id) {
@@ -46,10 +43,6 @@ public class FlightController {
         return flightService.getByOrigin(origin);
     }
 
-    @GetMapping("/dolarprice")
-    public double getDolar() {
-        return flightService.getDolar();
-    }
 
     @PostMapping("/add/{companyId}")
     public Optional<Flight> createFlight(@PathVariable Long companyId, @RequestBody Flight flight) {

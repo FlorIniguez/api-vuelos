@@ -38,12 +38,5 @@ public class FlightUtils {
         String apiUrl = "https://dolarapi.com/v1/dolares/tarjeta";
         //solicitud a esa ruta y la clase que voy a usar para es consulta
         return restTemplate.getForObject(apiUrl, DolarCard.class);
-
-    }
-    public DolarCard[] fetchAllDolars(){
-        RestTemplate restTemplate = restTemplate();
-        String apiUrl = "https://dolarapi.com/v1/dolares";
-        return restTemplate.getForEntity(apiUrl, DolarCard[].class).getBody();
-
     }
 }

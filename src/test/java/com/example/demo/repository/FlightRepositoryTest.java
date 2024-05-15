@@ -26,7 +26,7 @@ public class FlightRepositoryTest {
     @Autowired
     FlightUtils flightUtils;
     private Flight flight;
-;
+
 
 
     @BeforeEach

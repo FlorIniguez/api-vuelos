@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.exceptions.ResourcedNotFoundException;
 import com.example.demo.model.Company;
 import com.example.demo.model.DolarCard;
 import com.example.demo.model.Flight;
@@ -34,8 +35,11 @@ public class FlightService {
         return flightUtils.flightMapperDto(flightList, dolarPrice);
     }
 
-    public Optional<Flight> searchFlightId(Long id) {
-        return flightRepository.findById(id);
+    public FlightDto searchFlightById(Long id) throws ResourcedNotFoundException {
+       Flight flight1 = flightRepository.findById(id)
+                .orElseThrow(() -> new ResourcedNotFoundException("Flight", "id", id));
+        double dolarPrice = getDolar();
+        return flightUtils.convertToFlightDto(flight1,dolarPrice);
     }
 
     public List<Flight> saleFlights(Integer offerPrice) {
@@ -74,8 +78,9 @@ public class FlightService {
         return flightRepository.findById(flight.getId());
     }
 
-    public void deleteFlight(Long id) {
-        flightRepository.deleteById(id);
+    public void deleteFlight(Long id) throws ResourcedNotFoundException {
+        Flight flight= flightRepository.findById(id).orElseThrow(()-> new ResourcedNotFoundException("Flight","Id", id));
+        flightRepository.deleteById(flight.getId());
     }
 }
 

@@ -19,6 +19,9 @@ spring:
       hibernate:
     dialect: org.hibernate.dialect.MySQLDialect
 
+dolarapi:
+    url: ${URL_DOLAR:https://dolarapi.com/v1/dolares/tarjeta}
+
 
 eureka:
   client:
